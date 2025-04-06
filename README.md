@@ -18,15 +18,15 @@ cd server
 npm i
 ```
 
-Run both the client and server app concurrenly to see the app in action
+Run both the client and server app concurrently to see the app in action
 
-To start the client app run this command in the client directory:
+To start the client app, run this command in the client directory:
 
 ```bash
 npm run dev
 ```
 
-To start the server app run this command in the client directory:
+To start the server app, run this command in the client directory:
 
 ```bash
 node index.js
@@ -37,3 +37,11 @@ To run test on the client, move to the client directory and run
 ```bash
 npm run test
 ```
+
+## Improvements
+
+- Add an ErrorBoundary component
+- Implement a better user experience
+- Use Vitest to test instead of jest
+- Write more test cases
+- Let users know when they are connected/disconnected to the socket
