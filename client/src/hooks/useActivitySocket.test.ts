@@ -20,7 +20,7 @@ jest.mock('socket.io-client', () => ({
 }));
 
 jest.mock('@/lib/constants.ts', () => ({
-    SOCKET_URL: "ws:localhost:4000"
+    SOCKET_URL: "ws://localhost:4000"
 }))
 
 const mockDispatch = jest.fn();

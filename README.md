@@ -38,6 +38,12 @@ To run test on the client, move to the client directory and run
 npm run test
 ```
 
+## Assumptions
+
+- A feature to allow users create new activities will be a nice to have
+- New Activities should be at the top of the list
+- Showing a message to let users know when there are no activities
+
 ## Improvements
 
 - Add an ErrorBoundary component

@@ -55,6 +55,9 @@ const ActivityTracker = () => {
           </div>
         </div>
       ))}
+      {activities.length === 0 && (
+        <span className="text-xl">No activities found</span>
+      )}
       <div className="bg-white fixed bottom-16 left-0 right-0 max-w-[800px] m-auto">
         <Textarea
           value={activity}
