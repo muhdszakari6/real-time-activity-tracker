@@ -1,22 +1,49 @@
+import debounce from "lodash.debounce";
+import { useActivityDispatch } from "@/context/activityDispatchContext";
+import { useActivityState } from "@/context/activityStateContext";
 import { useState } from "react";
+import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { mockActivities } from "./data";
+import { useActivitySocket } from "@/hooks/useActivitySocket";
 
 const ActivityTracker = () => {
-  // const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [activity, setActivity] = useState("");
+  const state = useActivityState();
+  const dispatch = useActivityDispatch();
+  const { isConnected, sendMessage } = useActivitySocket();
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const debounceSearch = debounce((e) => {
+    setSearch(e.target.value);
+    dispatch({ type: "search_activity", payload: e.target.value });
+  }, 300);
 
-  const addActiviity = () => {};
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debounceSearch(e);
+  };
+
+  const addActiviity = () => {
+    if (activity == "") return;
+    const item = {
+      id: state.activities.length + 1,
+      date: new Date().toDateString(),
+      content: activity,
+    };
+    sendMessage(item);
+    setActivity("");
+  };
+
+  const activities =
+    search === "" ? state.activities : state.filteredActivities;
 
   return (
     <section className="px-10 py-10 min-h-screen max-w-[800px] m-auto pb-[200px]">
+      {!isConnected && <ErrorMessage />}
       <h1 className="text-xl mb-4">Activities</h1>
       <Input onChange={handleSearch} placeholder="Search" className="mb-4" />
-      {mockActivities.map((item) => (
+      {activities.map((item) => (
         <div
           key={item.id}
           className="pb-4 ps-4 border-l border-gray-300 relative"
