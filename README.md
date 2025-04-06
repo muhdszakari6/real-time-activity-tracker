@@ -43,6 +43,7 @@ npm run test
 - A feature to allow users create new activities will be a nice to have
 - New Activities should be at the top of the list
 - Showing a message to let users know when there are no activities
+- Have seperate folder for client and server app so both can be scalable
 
 ## Improvements
 
